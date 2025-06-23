@@ -24,7 +24,7 @@
     $filterIndicators = $getFilterIndicators();
     $hasColumnGroups = $hasColumnGroups();
     $hasColumnsLayout = $hasColumnsLayout();
-    $hasSummary = $hasSummary();
+    $hasSummary = $hasSummary($this->getAllTableSummaryQuery());
     $header = $getHeader();
     $headerActions = array_filter(
         $getHeaderActions(),
@@ -1244,7 +1244,9 @@
                     @endif
                 </x-filament-tables::table>
             @elseif ($records === null)
-                <div class="h-32"></div>
+                <div class="flex h-32 items-center justify-center">
+                    <x-filament::loading-indicator class="h-8 w-8" />
+                </div>
             @elseif ($emptyState = $getEmptyState())
                 {{ $emptyState }}
             @else
